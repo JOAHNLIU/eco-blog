@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 0",
+    "lint": "eslint .",
     "build": "echo \"Build complete\""
   },
   "keywords": [],
@@ -21,5 +20,8 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^9.1.7",
     "prettier": "^3.4.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
   }
 }

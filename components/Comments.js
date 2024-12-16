@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function Comments({ comments, users }) {
+const Comments = () => {
+  const [comment, setComment] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Ваш коментар:', comment);
+    setComment('');
+  };
+
   return (
     <div>
-      {comments.map(comment => (
-        <div key={comment.id}>
-          <p>{comment.content}</p>
-          <p><strong>{users.find(user => user.id === comment.userId)?.name}</strong></p>
-        </div>
-      ))}
+      <h2>Додати коментар</h2>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Введіть ваш коментар"
+          rows="4"
+        ></textarea>
+        <br />
+        <button type="submit">Надіслати</button>
+      </form>
     </div>
   );
-}
+};
 
 export default Comments;

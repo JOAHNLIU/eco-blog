@@ -1,19 +1,19 @@
 import React from 'react';
-import Comments from './Comments';
 
-function Posts({ posts, comments, users }) {
+const Posts = ({ posts }) => {
   return (
     <div>
-      {posts.map(post => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
-          <h3>Коментарі:</h3>
-          <Comments comments={comments.filter(comment => comment.postId === post.id)} users={users} />
-        </div>
-      ))}
+      <h2>Список постів</h2>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default Posts;

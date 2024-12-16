@@ -1,0 +1,43 @@
+// @ts-nocheck
+const request = require('supertest');
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
+const app = require('../server'); // Імпорт має бути після mongoose, щоб уникнути конфліктів
+
+let mongoServer;
+
+beforeAll(async () => {
+  mongoServer = await MongoMemoryServer.create();
+  const uri = mongoServer.getUri();
+
+  await mongoose.disconnect(); // Додано
+  await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+});
+
+afterAll(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+});
+
+describe('GET /posts', () => {
+  it('should return all posts', async () => {
+    const res = await request(app).get('/posts');
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveLength(0); // або більше в залежності від наявних даних
+  });
+});
+
+describe('POST /posts', () => {
+  it('should create a new post', async () => {
+    const res = await request(app)
+      .post('/posts')
+      .send({
+        title: 'Новий пост',
+        content: 'Контент нового поста'
+      });
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty('_id');
+    expect(res.body).toHaveProperty('title', 'Новий пост');
+    expect(res.body).toHaveProperty('content', 'Контент нового поста');
+  });
+});

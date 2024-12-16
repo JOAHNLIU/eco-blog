@@ -1,16 +1,18 @@
-// api.js
-import axios from 'axios';
+const axios = require('axios');
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com'; 
+const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
-export const fetchUsers = () => {
-  return axios.get(`${BASE_URL}/users`);
+exports.fetchUsers = async () => {
+  const response = await axios.get(`${BASE_URL}/users`);
+  return response.data;
 };
 
-export const fetchPosts = () => {
-  return axios.get(`${BASE_URL}/posts`);
+exports.fetchPosts = async () => {
+  const response = await axios.get(`${BASE_URL}/posts`);
+  return response.data;
 };
 
-export const fetchComments = () => {
-  return axios.get(`${BASE_URL}/comments`);
+exports.fetchComments = async () => {
+  const response = await axios.get(`${BASE_URL}/comments`);
+  return response.data;
 };

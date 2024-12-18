@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
 
-// Подключение к MongoDB
-const PORT = process.env.PORT || 0; // Позволяет выбрать свободный порт
+
+const PORT = process.env.PORT || 0; 
 
 app.get('/api/posts', (req, res) => {
-  res.status(200).json([]); // Временный ответ для тестов
+  res.status(200).json([]); 
 });
 
 const server = app.listen(PORT, () => {
